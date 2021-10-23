@@ -8,3 +8,6 @@ class HTTPInfo:
     host: str
     path: str
     content_length: int
+
+    def extract_section(self):
+        return self.host + self.path.rsplit('/', 1)[0]

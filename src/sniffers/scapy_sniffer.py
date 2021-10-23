@@ -8,10 +8,11 @@ from src.interfaces.abstract_sniffer import AbstractSniffer
 from src.types.http_info import HTTPInfo
 
 from logging import getLogger
-logger = getLogger("SnappySniffer")
+
+logger = getLogger("ScapySniffer")
 
 
-class SnappySniffer(AbstractSniffer):
+class ScapySniffer(AbstractSniffer):
 
     def __init__(self, receive_http_callback: Callable[[HTTPInfo], None]):
         scapy_all.load_layer("http")
@@ -41,11 +42,9 @@ class SnappySniffer(AbstractSniffer):
 
     def manage_http_pkt(self, pkt):
         if pkt.haslayer(HTTPRequest):
-            http_info = SnappySniffer.parse_packet(pkt)
+            http_info = ScapySniffer.parse_packet(pkt)
             if http_info is not None:
                 self.receive_http_callback(http_info)
-            #print(pkt.summary())
-            #print(pkt.show())
             '''
             curl http://google.fr//punkie//brewset/1000?q=1
                 host = b'GET'
