@@ -5,7 +5,7 @@ import scapy.all as scapy_all
 from scapy.layers.http import HTTPRequest
 
 from src.interfaces.abstract_sniffer import AbstractSniffer
-from src.types.http_info import HTTPInfo
+from src.interfaces.abstract_collector import HTTPInfo
 
 from logging import getLogger
 
@@ -37,7 +37,7 @@ class ScapySniffer(AbstractSniffer):
             else:
                 return None
         except (ValueError, UnicodeDecodeError):
-            logger.warn('Unable to decode packet')
+            logger.warning('Unable to decode packet')
         return None
 
     def manage_http_pkt(self, pkt):

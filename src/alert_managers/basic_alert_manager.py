@@ -16,14 +16,15 @@ class BasicAlertManager(AbstractAlertManager):
         :return: alert_info in case threshold crossed ; None otherwise
         """
         emit_alert = False
+
         if self.status == AlertStatus.NO_ALERT:
             # traffic crosses over threshold
             if traffic > self.traffic_limit:
                 self.status = AlertStatus.OVER_THRESHOLD
                 emit_alert = True
         elif self.status == AlertStatus.OVER_THRESHOLD:
-            # traffic crosses under threshold
-            if traffic < self.traffic_limit:
+            # traffic crosses under threshold (or equal)
+            if traffic <= self.traffic_limit:
                 self.status = AlertStatus.UNDER_THRESHOLD
                 emit_alert = True
         elif self.status == AlertStatus.UNDER_THRESHOLD:
@@ -34,6 +35,7 @@ class BasicAlertManager(AbstractAlertManager):
             else:
                 # traffic is normal
                 self.status = AlertStatus.NO_ALERT
+
         if emit_alert:
             return AlertInfo(status=self.status,
                              traffic_value=traffic,

@@ -3,10 +3,10 @@ import time
 from threading import Event
 from typing import Optional
 from src.alert_managers.basic_alert_manager import BasicAlertManager, AlertInfo
+from src.interfaces.abstract_collector import HTTPInfo
 from src.collectors.basic_collector import BasicCollector
 from src.sniffers.scapy_sniffer import ScapySniffer
 from src.interfaces.abstract_view import AbstractView
-from src.types.http_info import HTTPInfo
 
 
 class Controller:
@@ -39,7 +39,6 @@ class Controller:
 
     def _update_view(self, opt_alert_info: Optional[AlertInfo]):
         self.view.update_highest_hits(self.http_collector.get_highest_hits())
-        self.view.update_traffic(self.http_collector.get_total_traffic())
         if opt_alert_info:
             self.view.update_alert_info(opt_alert_info)
         self.view.print_alert_info()

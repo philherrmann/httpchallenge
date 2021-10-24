@@ -1,7 +1,18 @@
 from typing import List
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from src.types.http_info import HTTPInfo
+
+
+@dataclass(frozen=True)
+class HTTPInfo:
+
+    method: str  # make it an enum
+    host: str
+    path: str
+    content_length: int
+
+    def extract_section(self):
+        return self.host + self.path.rsplit('/', 1)[0]
 
 
 @dataclass(frozen=True)
