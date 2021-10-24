@@ -1,4 +1,6 @@
 from typing import List
+from time import time
+from datetime import datetime
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
@@ -18,12 +20,23 @@ class HTTPInfo:
 @dataclass(frozen=True)
 class HitInfo:
 
-    section: str
-    nb_hits: int
-    traffic: int
+    section: str = ""
+    nb_hits: int = 0
+    traffic: int = 0
+    last_hit_traffic: int = 0
+    last_hit_timestamp: float = 0.0
+
+    def add(self, section: str, http_info: HTTPInfo): # -> HitInfo:
+        return HitInfo(section=section,
+                       nb_hits=self.nb_hits + 1,
+                       traffic=self.traffic + http_info.content_length,
+                       last_hit_traffic=http_info.content_length,
+                       last_hit_timestamp=time())
 
     def __repr__(self):
-        return f"{self.section}: hits {self.nb_hits} | total traffic {self.traffic}"
+        last_dt = datetime.fromtimestamp(self.last_hit_timestamp)
+        return f"{self.section}: hits {self.nb_hits} | total traffic {self.traffic} " \
+               f"| last request traffic {self.last_hit_traffic} @ {last_dt}"
 
 
 class AbstractCollector(ABC):
@@ -52,7 +65,7 @@ class AbstractCollector(ABC):
     @abstractmethod
     def clear(self, clear_history: bool = False) -> None:
         """
-        Clear total traffic information
+        Clear traffic information.
         :param clear_history: also clear history of traffic
         """
 

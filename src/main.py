@@ -28,11 +28,11 @@ class ControllerThread(Thread):
 
 
 def main(selected_view: AbstractView):
-    controller = Controller(view=selected_view, update_period=2, traffic_history_span=20)
+    controller = Controller(view=selected_view, update_period=2, traffic_history_span=20, traffic_limit=10000)
     print("start controller")
     controller_thread = ControllerThread(controller)
     controller_thread.start()
-    time.sleep(3000)
+    time.sleep(3000)  # in principle should wait forever
     controller.stop()
     controller_thread.join()
 

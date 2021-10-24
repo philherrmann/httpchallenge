@@ -14,7 +14,7 @@ class PrintView(AbstractView):
         self.all_alerts: List[AlertInfo] = []
 
     def update_highest_hits(self, highest_hits: List[HitInfo]) -> None:
-        print(HIGHEST_HITS_HEADER)
+        print(f"{HIGHEST_HITS_HEADER} @ {datetime.now()}")
         for highest_hit in highest_hits:
             print(f"{highest_hit}")
 

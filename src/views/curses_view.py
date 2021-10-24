@@ -26,7 +26,7 @@ class CursesView(AbstractView):
     def update_highest_hits(self, highest_hits: List[HitInfo]) -> None:
         self.win_highest_hits.clear()
         try:
-            self.win_highest_hits.addstr(f'{HIGHEST_HITS_HEADER}\n')
+            self.win_highest_hits.addstr(f'{HIGHEST_HITS_HEADER} @ {datetime.now()}\n')
             for highest_hit in highest_hits:
                 self.win_highest_hits.addstr(f"{highest_hit}\n")
         except curses.error:

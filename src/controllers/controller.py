@@ -11,7 +11,8 @@ from src.interfaces.abstract_view import AbstractView
 
 class Controller:
 
-    def __init__(self, view: AbstractView,
+    def __init__(self,
+                 view: AbstractView,
                  update_period: int = 10,
                  traffic_history_span: int = 120,
                  traffic_limit: int = 10000):
@@ -42,7 +43,6 @@ class Controller:
         if opt_alert_info:
             self.view.update_alert_info(opt_alert_info)
         self.view.print_alert_info()
-        self.http_collector.clear()
 
     def stop(self):
         self.stop_event.set()
