@@ -6,7 +6,9 @@ from time import time
 
 @dataclass(frozen=True)
 class TrafficInfo:
-
+    """
+    Used only internally to this module.
+    """
     timestamp: float
     traffic_len: int
 

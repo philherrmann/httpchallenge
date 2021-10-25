@@ -24,8 +24,6 @@ class ScapySniffer(AbstractSniffer):
     @staticmethod
     def parse_packet(pkt) -> Optional[HTTPInfo]:
         try:
-            # content_length = int.from_bytes(pkt.Content_Length, "big")
-            # content_length2 = int.from_bytes(pkt.Content_Length, "big")
             if pkt.Content_Length is not None and pkt.Host is not None \
                     and pkt.Method is not None and pkt.Path is not None:
                 content_length = int(pkt.Content_Length.decode("utf-8"))
@@ -40,22 +38,14 @@ class ScapySniffer(AbstractSniffer):
             logger.warning('Unable to decode packet')
         return None
 
-    def manage_http_pkt(self, pkt):
+    def manage_http_pkt(self, pkt) -> None:
         if pkt.haslayer(HTTPRequest):
             http_info = ScapySniffer.parse_packet(pkt)
             if http_info is not None:
                 self.receive_http_callback(http_info)
-            '''
-            curl http://google.fr//punkie//brewset/1000?q=1
-                host = b'GET'
-                host = b'google.fr'
-                host = b'//punkie//brewset/1000?q=1'
-            '''
 
-    def start(self):
-        print("start sniffing")
+    def start(self) -> None:
         self.sniffer.start()
 
-    def stop(self):
-        print("stop sniffing")
+    def stop(self) -> None:
         self.stop_event.set()

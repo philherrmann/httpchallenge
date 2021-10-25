@@ -28,13 +28,22 @@ class ControllerThread(Thread):
 
 
 def main(selected_view: AbstractView):
-    controller = Controller(view=selected_view, update_period=2, traffic_history_span=20, traffic_limit=10000)
+    # update period: 10 seconds
+    # traffic history for alerting: 2 minutes / 120 seconds
+    # traffic limit: 10k bytes (which is low)
+    controller = Controller(view=selected_view,
+                            update_period=10,
+                            traffic_history_span=120,
+                            traffic_limit=10000)
     print("start controller")
     controller_thread = ControllerThread(controller)
     controller_thread.start()
-    time.sleep(3000)  # in principle should wait forever
+    '''
+    # in principle application should run 'forever'
+    time.sleep(3000)
     controller.stop()
     controller_thread.join()
+    '''
 
 
 if __name__ == '__main__':

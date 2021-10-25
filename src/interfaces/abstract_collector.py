@@ -14,7 +14,7 @@ class HTTPInfo:
     content_length: int
 
     def extract_section(self):
-        return self.host + self.path.rsplit('/', 1)[0]
+        return self.host + '/'.join(self.path.split('/', 2)[:2])
 
 
 @dataclass(frozen=True)
