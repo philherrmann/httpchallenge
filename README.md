@@ -140,7 +140,7 @@ And the second test probably handles too much.
 # Other notes
 
 * This project took me more than double the expected time of 4 hours. And I would have spent more time for a 
-  production ready application.
+  production ready application. **In particular a lot of important methods are missing documentation due to time constraints.**
 * Both the "print" view and the ncurses views have been tested on Windows, and in the Windows Linux subsystem.
 * The script should run on a standard python3 installation starting from version 3.7 (cf. dataclasses), \
   provided scapy and ncurses are installed properly (scapy is a must, ncurses can be avoided if the print view \
