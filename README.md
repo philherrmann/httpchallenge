@@ -14,7 +14,9 @@ Here is the work sample that was discussed (Remember the focus is on polish, det
 
 * project is written in python3
 * choice is to use a 3rd party library for monitoring the HTTP traffic (scapy https://scapy.net)\
-  in order to concentrate the challenge on the monitoring and alerting features
+  in order to concentrate the challenge on the monitoring and alerting features.
+* only HTTP, no HTTPs considered (and end-to-end encryption would prevent it unless going through \
+  a man-in-the-middle proxy).
 
 # Project code structure
 
