@@ -23,16 +23,16 @@ Here is the work sample that was discussed (Remember the focus is on polish, det
 Code is organized in packages and modules as follows:
 
 * *src/interfaces*\
-      Contains the definitions of all interfaces as abstract classes:\
-         * *abstract_sniffer.py* = abstract HTTP traffic sniffer in charge of monitoring HTTP requests .
-         * *abstract_collector.py* = abstract HTTP traffic collector in charge of collecting HTTP traffic.
-         * *abstract_alert_manager.py* = abstract alert manager.
-         * *abstract_view.py* = abstract view for displaying traffic and alerting information.
-    Another valid possibility would be to put the interface of each class at the same level than its\
-    implementation(s).
+Contains the definitions of all interfaces as abstract classes:\
+* *abstract_sniffer.py* = abstract HTTP traffic sniffer in charge of monitoring HTTP requests .
+* *abstract_collector.py* = abstract HTTP traffic collector in charge of collecting HTTP traffic.
+* *abstract_alert_manager.py* = abstract alert manager.
+* *abstract_view.py* = abstract view for displaying traffic and alerting information.\
+
+  Another valid possibility would be to put the interface of each class at the same level than its implementation(s).
 
 * *src/sniffers*\
-  Contains the HTTP sniffer implementation which translates packet information to HTTP information.\     
+  Contains the HTTP sniffer implementation which translates packet information to HTTP information.     
   Uses the scapy 3rd party library.\
   Corresponds to *abstract_sniffer.py*.
 
